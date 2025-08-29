@@ -1,15 +1,20 @@
 class Solution {
-    private boolean hasNoZeros(int num) {
-        return !String.valueOf(num).contains("0");
-    }
-
     public int[] getNoZeroIntegers(int n) {
-        for (int a = 1; a < n; a++) {
-            int b = n - a;
-            if (hasNoZeros(a) && hasNoZeros(b)) {
+        for (int i = 1; i < n; i++) {
+            int a = i;
+            int b = n - i;
+            if (!hasZero(a) && !hasZero(b)) {
                 return new int[]{a, b};
             }
         }
         return new int[]{};
+    }
+
+    private boolean hasZero(int num) {
+        while (num > 0) {
+            if (num % 10 == 0) return true; 
+            num /= 10;
+        }
+        return false;
     }
 }
