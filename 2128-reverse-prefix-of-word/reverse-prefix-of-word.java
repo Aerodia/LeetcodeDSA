@@ -16,14 +16,10 @@ class Solution {
             }
         }
         if(count == 0) return word;
-        for(int i = index+1 ; i<word.length();i++){
-            if(word.charAt(i)!=ch && count !=0){
-                notreverse.append(word.charAt(i));
-            }
-            else if(word.charAt(i)==ch && count !=0){
-                notreverse.append(word.charAt(i));
-            }
+        for (int i = index + 1; i < word.length(); i++) {
+            notreverse.append(word.charAt(i));
         }
+
         toreverse.reverse();
         String result = toreverse.toString() + notreverse.toString();
         return result;
