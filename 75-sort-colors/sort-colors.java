@@ -22,6 +22,5 @@ class Solution {
                 mid++;
             }
         }
-        System.out.println(Arrays.toString(nums));
     }
 }
