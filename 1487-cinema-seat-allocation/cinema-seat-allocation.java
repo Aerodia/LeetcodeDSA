@@ -1,31 +1,18 @@
 class Solution {
-
     public int maxNumberOfFamilies(int n, int[][] reservedSeats) {
-        int left = 0b11110000;
-        int middle = 0b11000011;
-        int right = 0b00001111;
-
-        Map<Integer, Integer> occupied = new HashMap<Integer, Integer>();
-        for (int[] seat : reservedSeats) {
-            if (seat[1] >= 2 && seat[1] <= 9) {
-                int origin = occupied.containsKey(seat[0])
-                    ? occupied.get(seat[0])
-                    : 0;
-                int value = origin | (1 << (seat[1] - 2));
-                occupied.put(seat[0], value);
-            }
+        Map<Integer, Integer> d = new HashMap<>();
+        for (var e : reservedSeats) {
+            int i = e[0], j = e[1];
+            d.merge(i, 1 << (10 - j), (x, y) -> x | y);
         }
-
-        int ans = (n - occupied.size()) * 2;
-        for (Map.Entry<Integer, Integer> entry : occupied.entrySet()) {
-            int row = entry.getKey(),
-                bitmask = entry.getValue();
-            if (
-                (bitmask | left) == left ||
-                (bitmask | middle) == middle ||
-                (bitmask | right) == right
-            ) {
-                ++ans;
+        int[] masks = {0b0111100000, 0b0000011110, 0b0001111000};
+        int ans = (n - d.size()) * 2;
+        for (int x : d.values()) {
+            for (int mask : masks) {
+                if ((x & mask) == 0) {
+                    x |= mask;
+                    ++ans;
+                }
             }
         }
         return ans;
