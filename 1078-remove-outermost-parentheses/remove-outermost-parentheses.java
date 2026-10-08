@@ -2,8 +2,8 @@ class Solution {
     public String removeOuterParentheses(String s) {
         int open =0;
         int close =0;
-        char op = '('; //open 
-        char cp = ')'; //close 
+        char op = '(';
+        char cp = ')'; 
         String temp = "";
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<s.length();i++)
